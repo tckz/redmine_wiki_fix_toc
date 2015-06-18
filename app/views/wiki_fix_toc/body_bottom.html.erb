@@ -1,0 +1,92 @@
+
+<script type="text/javascript">
+(function($){
+	"use strict";
+
+	function resetPosition($toc) {
+		$toc.css({
+			"position": "relative",
+			"top": "",
+			"left": ""
+		});
+	}
+
+	var tocs = [];
+	function fitToScrollTop() {
+		var scrollTop = $(document).scrollTop();
+		$.each(tocs, function(index, toc) {
+			var $toc = toc.ul;
+			if (scrollTop > toc.position.top) {
+				var currentPosition = $toc.css("position");
+				var nextCss = {
+					"position": "fixed"
+				};
+				if (currentPosition != "fixed") {
+					nextCss.top = 0;
+					nextCss.left = toc.position.left;
+				}
+				$toc.css(nextCss);
+			} else {
+				resetPosition($toc);
+			}
+		});
+	}
+
+	function collectTocs() {
+		tocs.length = 0;
+		var windowHeight = $(window.top).height();
+		$('ul.toc.right').each(function(index, ul) {
+			var $ul = $(ul);
+			if ($ul.height() >= windowHeight) {
+				// Too tall toc. Ignore.
+				return true;
+			}
+
+			tocs.push({
+				"ul": $ul,
+				"position": $ul.position()
+			});
+
+			return true;
+		});
+	}
+
+
+	$(function() {
+		$("ul.toc.right").each(function(index, ul) {
+			$(ul)
+				.css({
+					// 16px: width of edit.png
+					"margin-right": "16px",
+					"cursor": "move"
+				})
+		    	.draggable({
+					containment: "window",
+					scroll: false,
+		        	cursor: "move",
+		        	opacity: 0.8
+		    	});
+		});
+
+		collectTocs();
+
+		$(window)
+			.on("resize", function() {
+				$.each(tocs, function(index, toc) {
+					resetPosition(toc.ul);
+				});
+	
+				collectTocs();
+				fitToScrollTop();
+			})
+			.on("scroll", function() {
+				fitToScrollTop();
+			});
+	});
+
+	$(window).on("load", function() {
+		fitToScrollTop();
+	});
+})(jQuery);
+</script>
+
