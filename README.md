@@ -40,8 +40,8 @@ See COPYRIGHT.txt and GPL.txt for details.
 
 ## My environment
 
-* CentOS 7.3 x64
-	* ruby-2.2.0p648
-	* redmine-3.4.2
-
+* Based on docker image: redmine:4  
+  https://hub.docker.com/_/redmine/
+  * ruby-2.5.3p105
+  * redmine-4.0.0
 
