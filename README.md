@@ -40,8 +40,7 @@ See COPYRIGHT.txt and GPL.txt for details.
 
 ## My environment
 
-* Based on docker image: redmine:4  
+* Based on docker image: redmine:5  
   https://hub.docker.com/_/redmine/
-  * ruby-2.5.3p105
-  * redmine-4.0.0
-
+  * ruby-3.1.2p20
+  * redmine-5.0.2
