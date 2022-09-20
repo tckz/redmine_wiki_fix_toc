@@ -21,7 +21,7 @@ Scroll down to bottom...
 https://github.com/tckz/redmine_wiki_fix_toc
 
 e.g.)  
-git clone git://github.com/tckz/redmine_wiki_fix_toc.git
+git clone https://github.com/tckz/redmine_wiki_fix_toc.git
 
 ## Install
 
